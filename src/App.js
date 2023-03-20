@@ -1,24 +1,63 @@
-import logo from './logo.svg';
+import React from 'react'
 import './App.css';
+import Header from './Components/HeaderComponent';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Routes, Route } from 'react-router-dom';
+
+import HomeContainer from './pages/HomePage';
+import DetailsContainer from './pages/DetailesPage';
+
+export const THEME = createTheme({
+  palette: {
+    light: {
+      main: '#111517',
+    },
+  },
+  typography: {
+   "fontFamily": `'Nunito Sans', sans-serif`,
+   "fontSize": 14,
+   h1:{
+    "fontSize": '1.5rem',
+    "fontWeight":'800',
+   },
+
+   h2:{
+    "fontSize": '2rem',
+    "fontWeight":'800',
+   },
+   
+   h5:{
+    "fontSize": '0.85rem',
+    "fontWeight":'800',
+   },
+
+   h4:{
+    "fontSize": '0.7rem',
+    "fontWeight":'600',
+   },
+   h3:{
+    "fontSize": '0.7rem',
+    "fontWeight":'400',
+   },
+
+   button:{
+    "fontSize": '0.7rem',
+    "fontWeight": '800'
+   }
+  }
+});
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={THEME}>
+      <React.Fragment>
+        <Header/>
+        <Routes>
+          <Route path="/" element={<HomeContainer />} />
+          <Route path="details" element={<DetailsContainer />} />
+        </Routes>
+      </React.Fragment>
+    </ThemeProvider>
   );
 }
 
